@@ -1,0 +1,166 @@
+class Board{
+final static int wall = 1;
+final static int pakuman = 2;
+final static int pebble = 3;
+final static int invs = 4;
+final static int ginvs = 5;
+final static int rev = 6;
+int[][] board ={{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
+
+                {1,3,3,3,3,3,4,3,3,3,3,3,3,3,1},
+                
+                {1,3,1,1,1,1,3,1,3,1,1,1,1,3,1},
+                
+                {1,3,3,3,3,3,3,1,3,3,3,5,3,3,1},
+                
+                {1,3,1,3,1,3,3,3,3,3,1,3,1,3,1},
+                
+                {1,3,3,3,3,3,1,3,1,3,3,3,3,3,1},
+                
+                {1,5,1,3,1,3,1,1,1,3,1,3,1,3,1},
+                
+                {1,3,3,3,3,3,3,2,3,3,3,3,3,3,1},
+                
+                {1,3,1,1,1,1,1,3,1,1,1,1,1,3,1},
+                
+                {1,3,3,3,3,3,3,3,3,3,3,3,3,3,1},
+                
+                {1,3,1,3,1,1,3,1,6,1,1,3,1,3,1},
+                
+                {1,3,3,6,3,3,3,1,3,3,3,3,3,3,1},
+                
+                {1,3,1,1,1,1,3,1,3,1,1,1,1,3,1},
+                
+                {1,3,3,3,3,4,3,3,3,3,3,3,5,3,1},
+                
+                {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,}};
+  
+  Board()
+  {
+  }
+
+
+void DrawWall() {  
+  fill(130);
+  noStroke();
+//boarder
+  rect(0,0,33,495);
+  rect(0,462,495,33);
+  rect(462,0,33,495);
+  rect(0,0,495,33);
+//middle
+  rect(198,198,99,33);
+  rect(198,165,33,33);
+  rect(264,165,33,33);
+//top
+  rect(231,66,33,66);
+  rect(132,198,33,33);
+  rect(66,198,33,33);
+  rect(330,198,33,33);
+  rect(396,198,33,33);
+  rect(132,132,33,33);
+  rect(330,132,33,33);
+  rect(66,66,33,33);
+  rect(66,132,33,33);
+  rect(99,66,99,33);
+  rect(297,66,99,33);
+  rect(396,66,33,33);
+  rect(396,132,33,33);
+//bottom
+  rect(66,264,165,33);
+  rect(264,264,165,33);
+  rect(66,330,33,33);
+  rect(66,396,132,33);
+  rect(132,330,66,33);
+  rect(231,330,33,99);
+  rect(297,330,66,33);
+  rect(396,330,33,33);
+  rect(297,396,132,33);
+}
+
+
+
+void DrawPebbles()
+{
+  fill(255);
+  for(int i=0; i<board.length; i++)
+  {
+    for(int j=0; j<board[0].length; j++)
+    {
+      if (board[i][j]==pebble)
+      {
+      ellipse((float)revert(j),(float)revert(i),8.25,8.25);
+      }
+    }
+  }
+  
+  fill(255,255,0);
+  for(int i=0; i<board.length; i++)
+  {
+    for(int j=0; j<board[0].length; j++)
+    {
+      if (board[i][j]==invs)
+      {
+      triangle((float)revert(j)-10,(float)revert(i)+10,(float)revert(j),(float)revert(i)-10,(float)revert(j)+10,(float)revert(i)+10);
+      }
+    }
+  }
+
+  fill(0,255,0);
+  for(int i=0; i<board.length; i++)
+  {
+    for(int j=0; j<board[0].length; j++)
+    {
+      if (board[i][j]==ginvs)
+      {
+      rect((float)revert(j)-10,(float)revert(i)-10,20,20);
+      }
+    } 
+}
+  fill(0,0,255);
+  for(int i=0; i<board.length; i++)
+  {
+    for(int j=0; j<board[0].length; j++)
+    {
+      if (board[i][j]==rev)
+      {
+      ellipse((float)revert(j),(float)revert(i),13,13);
+      }
+    }
+  }
+}
+  
+  
+double convert(double x)   //big grid to small grid
+{
+ double a = (x-16.5)/33;
+ return a;
+  
+}
+
+double revert(double x)   //small grid to big grid
+{
+  double a = x*33 + 16.5;
+  return a;
+}
+  
+boolean win()
+{
+  int z = 0;
+  for(int i=0;i<board.length;i++)
+  {
+    for(int j=0; j<board[0].length;j++)
+    {
+      if( board[i][j]==3)
+        z++;
+    } 
+  }
+  if(z==0)
+  {
+    return true; 
+  }
+  return false;
+}  
+  
+  
+}
